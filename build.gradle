@@ -13,11 +13,11 @@ buildscript {
 
 allprojects {
     ext {
-        androidApplicationId = 'com.rumodigi.fanduelmobilechallenge.presentation'
+        androidApplicationId = 'com.rumodigi.fanduelmobilechallenge'
         androidVersionCode = 1
         androidVersionName = "1.0"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-        testApplicationId = 'com.rumodigi.fanduelmobilechallenge.presentation.test'
+        testApplicationId = 'com.rumodigi.fanduelmobilechallenge.test'
     }
 }
 

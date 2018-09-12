@@ -73,8 +73,6 @@ dependencies {
     compileOnly presentationDependencies.javaxAnnotation
 
     androidTestImplementation presentationTestDependencies.mockito
-//    androidTestImplementation presentationTestDependencies.dexmaker
-//    androidTestImplementation presentationTestDependencies.dexmakerMockito
     androidTestImplementation presentationTestDependencies.espresso
     androidTestImplementation presentationTestDependencies.testingSupportLib
 
