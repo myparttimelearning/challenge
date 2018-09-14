@@ -36,8 +36,8 @@ ext {
     leakCanaryVersion = '1.5'
 
     presentationDependencies = [
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
             recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",

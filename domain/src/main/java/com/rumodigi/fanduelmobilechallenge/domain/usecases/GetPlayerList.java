@@ -18,12 +18,12 @@ import io.reactivex.Observable;
  *
  */
 
-class GetPlayerList extends UseCase<List<Player>, Void> {
+public class GetPlayerList extends UseCase<List<Player>, Void> {
 
     private final PlayerRepository playerRepository;
 
     @Inject
-    GetPlayerList(PlayerRepository playerRepository, ThreadExecutor threadExecutor,
+    public GetPlayerList(PlayerRepository playerRepository, ThreadExecutor threadExecutor,
                 AfterExecutionThread afterExecutionThread) {
         super(threadExecutor, afterExecutionThread);
         this.playerRepository = playerRepository;

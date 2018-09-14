@@ -8,7 +8,7 @@ public class Player {
     private double fppg;
     private String imageUrl;
 
-    Player(String id) {
+    public Player(String id) {
         this.id = id;
     }
 

@@ -35,7 +35,8 @@ android {
         abortOnError false
         ignoreWarnings true
         disable 'InvalidPackage'            //Some libraries have issues with this.
-        disable 'OldTargetApi'              //Lint gives this warning but SDK 20 would be Android L Beta.
+        disable 'OldTargetApi'
+        //Lint gives this warning but SDK 20 would be Android L Beta.
         disable 'IconDensities'             //For testing purpose. This is safe to remove.
         disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
     }
@@ -64,9 +65,11 @@ dependencies {
     implementation project(':domain')
     implementation project(':data')
 
-    annotationProcessor presentationDependencies.butterKnife
     implementation presentationDependencies.dagger
+    implementation 'com.android.support:support-v4:23.4.0'
+    annotationProcessor presentationDependencies.daggerCompiler
     implementation presentationDependencies.butterKnife
+    annotationProcessor presentationDependencies.butterKnife
     implementation presentationDependencies.recyclerView
     implementation presentationDependencies.rxJava
     implementation presentationDependencies.rxAndroid
