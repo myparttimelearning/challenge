@@ -2,8 +2,6 @@ package com.rumodigi.fanduelmobilechallenge.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import io.reactivex.annotations.NonNull;
-
 public class PlayerEntity {
     @SerializedName("id")
     private String id;

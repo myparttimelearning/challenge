@@ -1,6 +1,5 @@
 package com.rumodigi.fanduelmobilechallenge.data.entity;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.rumodigi.fanduelmobilechallenge.data.entity.mapping.PlayerEntityJsonMap;
 
@@ -29,7 +28,8 @@ public class PlayerEntityTest {
             + "\"last_name\": \"Curry\"\n"
             + "}";
 
-    private static final String PLAYER_COLLECTION_JSON = "[{\n"
+    private static final String PLAYER_COLLECTION_JSON = "{\n"
+            + "\"players\":[{\n"
             + "\"first_name\": \"Stephen\",\n"
             + "\"fppg\": 47.94303797468354,\n"
             + "\"id\": \"15475-9524\",\n"
@@ -61,7 +61,8 @@ public class PlayerEntityTest {
             + "}\n"
             + "},\n"
             + "\"last_name\": \"Lillard\"\n"
-            + "}]";
+            + "}]\n"
+            + "}";
 
     private PlayerEntityJsonMap playerEntityJsonMap;
 

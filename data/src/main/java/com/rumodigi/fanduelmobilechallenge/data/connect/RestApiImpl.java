@@ -4,11 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.google.gson.Gson;
 import com.rumodigi.fanduelmobilechallenge.data.entity.PlayerEntity;
 import com.rumodigi.fanduelmobilechallenge.data.entity.mapping.PlayerEntityJsonMap;
-
-import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -48,7 +45,7 @@ public class RestApiImpl implements RestApi {
                     String playerJson = getPlayerEntitiesFromApi();
                     if(playerJson != null){
                         emitter.onNext(playerEntityJsonMap.transformPlayerEntityCollection(
-                                new Gson().fromJson(playerJson, JSONObject.class).get("players").toString()));
+                                playerJson));
                         emitter.onComplete();
                     } else {
                         emitter.onError(new Exception());
