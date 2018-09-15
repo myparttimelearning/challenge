@@ -4,16 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Button;
 
 import com.rumodigi.fanduelmobilechallenge.presentation.R;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.ContainsComponent;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.DaggerPlayerComponent;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.PlayerComponent;
-import com.rumodigi.fanduelmobilechallenge.presentation.model.PlayerModel;
-import com.rumodigi.fanduelmobilechallenge.presentation.view.fragments.PlayerListFragment;
+import com.rumodigi.fanduelmobilechallenge.presentation.view.fragments.PlayerComparisonFragment;
 
-public class PlayerListActivity extends BaseActivity implements ContainsComponent<PlayerComponent>,
-        PlayerListFragment.PlayerListListener{
+import butterknife.Bind;
+import butterknife.OnClick;
+
+public class PlayerListActivity extends BaseActivity implements ContainsComponent<PlayerComponent>{
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, PlayerListActivity.class);
@@ -29,7 +31,7 @@ public class PlayerListActivity extends BaseActivity implements ContainsComponen
 
         this.initializeInjector();
         if (savedInstanceState == null) {
-            addFragment(R.id.fragmentContainer, new PlayerListFragment());
+            addFragment(R.id.fragmentContainer, new PlayerComparisonFragment());
         }
     }
 
@@ -44,8 +46,5 @@ public class PlayerListActivity extends BaseActivity implements ContainsComponen
         public PlayerComponent getComponent() {
             return playerComponent;
         }
-
-    @Override public void onUserClicked(PlayerModel playerModel) {
-        //this.navigator.navigateToUserDetails(this, playerModel.getUserId());
-    }}
+}
 
