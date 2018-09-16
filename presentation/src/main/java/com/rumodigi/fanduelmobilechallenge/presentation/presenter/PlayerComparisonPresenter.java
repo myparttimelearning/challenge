@@ -24,6 +24,7 @@ public class PlayerComparisonPresenter implements Presenter {
     private final List<Player> playerList;
     private Player player1, player2;
     private Pair<Player, Player> playerPair;
+    private int score = 0;
 
     @Inject
     public PlayerComparisonPresenter(GetPlayerList getPlayerListUseCase){
@@ -65,7 +66,27 @@ public class PlayerComparisonPresenter implements Presenter {
         playerComparisonView.renderPlayers(playerPair);
     }
 
+    public void guessedHigher(){
+        if (player2.getFppg() > player1.getFppg()){
+            score++;
+        }
+        playerComparisonView.updateScore(score);
+    }
+
+    public void guessedLower(){
+        if (player2.getFppg() < player1.getFppg()){
+            score++;
+        }
+        playerComparisonView.updateScore(score);
+    }
+
+    public void resetGame(){
+        score = 0;
+        playerComparisonView.updateScore(score);
+    }
+
     public void switchPlayers() {
+
         player1 = player2;
         setPlayer2();
         playerComparisonView.renderPlayers(playerPair);

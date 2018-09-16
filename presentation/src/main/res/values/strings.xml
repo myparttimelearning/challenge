@@ -9,5 +9,8 @@
     <string name="first_name">First Name</string>
     <string name="fppg">FPPG</string>
     <string name="fppg_is">FPPG is</string>
-    <string name="higher_or_lower">HIGHER or LOWER</string>
+    <string name="higher_or_lower">HIGHER or LOWER ?</string>
+    <string name="score">YOUR SCORE</string>
+    <string name="play_again">Play Again</string>
+    <string name="game_over">GAME OVER</string>
 </resources>

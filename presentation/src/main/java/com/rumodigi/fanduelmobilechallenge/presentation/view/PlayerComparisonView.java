@@ -11,4 +11,5 @@ public interface PlayerComparisonView extends LoadDataView{
      * @param playerModelPair The {@link Pair} of {@link Player} that will be shown.
      */
     void renderPlayers(Pair<Player, Player> playerModelPair);
+    void updateScore(int score);
 }
