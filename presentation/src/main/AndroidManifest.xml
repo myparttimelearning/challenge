@@ -7,14 +7,17 @@
 
     <application
         android:name=".AndroidApplication"
-        android:allowBackup="true">
-        <activity android:name=".view.activity.MainActivity" >
+        android:allowBackup="true"
+        android:theme="@android:style/Theme.Holo.NoActionBar">
+        <activity android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.PlayerListActivity" />
+        <activity android:name=".view.activity.PlayerComparisonActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

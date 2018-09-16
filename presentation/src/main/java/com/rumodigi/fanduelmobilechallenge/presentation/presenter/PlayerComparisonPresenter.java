@@ -62,11 +62,13 @@ public class PlayerComparisonPresenter implements Presenter {
     private void getFirstPair(){
         player1 = playerList.get(getRandomNumberInRange());
         setPlayer2();
+        playerComparisonView.renderPlayers(playerPair);
     }
 
     public void switchPlayers() {
         player1 = player2;
         setPlayer2();
+        playerComparisonView.renderPlayers(playerPair);
     }
 
     private void setPlayer2() {
@@ -75,8 +77,8 @@ public class PlayerComparisonPresenter implements Presenter {
             player2 = playerList.get(getRandomNumberInRange());
         }
         playerPair = new Pair<>(player1, player2);
-        Log.i("Player 1", player1.getFirstName() + " " + player1.getLastName());
-        Log.i("Player 2", player2.getFirstName() + " " + player2.getLastName());
+        Log.i("Player 1", playerPair.first.getFirstName() + " " + playerPair.first.getLastName());
+        Log.i("Player 2", playerPair.second.getFirstName() + " " + playerPair.second.getLastName());
     }
 
     private boolean playersAreTheSame() {

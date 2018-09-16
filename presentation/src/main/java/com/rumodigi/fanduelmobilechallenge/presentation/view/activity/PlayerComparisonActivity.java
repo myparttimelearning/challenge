@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.Button;
 
 import com.rumodigi.fanduelmobilechallenge.presentation.R;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.ContainsComponent;
@@ -12,13 +11,10 @@ import com.rumodigi.fanduelmobilechallenge.presentation.di.components.DaggerPlay
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.PlayerComponent;
 import com.rumodigi.fanduelmobilechallenge.presentation.view.fragments.PlayerComparisonFragment;
 
-import butterknife.Bind;
-import butterknife.OnClick;
-
-public class PlayerListActivity extends BaseActivity implements ContainsComponent<PlayerComponent>{
+public class PlayerComparisonActivity extends BaseActivity implements ContainsComponent<PlayerComponent>{
 
     public static Intent getCallingIntent(Context context) {
-        return new Intent(context, PlayerListActivity.class);
+        return new Intent(context, PlayerComparisonActivity.class);
     }
 
     private PlayerComponent playerComponent;
@@ -26,7 +22,6 @@ public class PlayerListActivity extends BaseActivity implements ContainsComponen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_player_list);
 
         this.initializeInjector();

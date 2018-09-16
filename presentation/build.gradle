@@ -66,11 +66,11 @@ dependencies {
     implementation project(':data')
 
     implementation presentationDependencies.dagger
-    implementation 'com.android.support:support-v4:23.4.0'
     annotationProcessor presentationDependencies.daggerCompiler
     implementation presentationDependencies.butterKnife
     annotationProcessor presentationDependencies.butterKnife
     implementation presentationDependencies.recyclerView
+    implementation presentationDependencies.constraintLayout
     implementation presentationDependencies.rxJava
     implementation presentationDependencies.rxAndroid
     compileOnly presentationDependencies.javaxAnnotation

@@ -16,6 +16,7 @@ ext {
     daggerVersion = '2.11'
     butterKnifeVersion = '7.0.1'
     recyclerViewVersion = '23.4.0'
+    constraintLayoutVersion = '1.1.2'
     rxJavaVersion = '2.1.0'
     rxAndroidVersion = '2.1.0'
     javaxAnnotationVersion = '1.2'
@@ -40,6 +41,7 @@ ext {
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
             recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+            constraintLayout:   "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}"

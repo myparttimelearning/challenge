@@ -3,7 +3,7 @@ package com.rumodigi.fanduelmobilechallenge.presentation.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import com.rumodigi.fanduelmobilechallenge.presentation.view.activity.PlayerListActivity;
+import com.rumodigi.fanduelmobilechallenge.presentation.view.activity.PlayerComparisonActivity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,9 +18,9 @@ public class Navigator {
      *
      * @param context A Context needed to open the destiny activity.
      */
-    public void navigateToUserList(Context context) {
+    public void navigateToPlayerComparison(Context context) {
         if (context != null) {
-            Intent intentToLaunch = PlayerListActivity.getCallingIntent(context);
+            Intent intentToLaunch = PlayerComparisonActivity.getCallingIntent(context);
             context.startActivity(intentToLaunch);
         }
     }

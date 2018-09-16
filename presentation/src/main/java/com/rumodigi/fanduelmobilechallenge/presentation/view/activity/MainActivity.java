@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @OnClick(R.id.loadDataButton)
-    void navigateToUserList() {
-        this.navigator.navigateToUserList(this);
+    void navigateToPlayerComparison() {
+        this.navigator.navigateToPlayerComparison(this);
     }
 }
