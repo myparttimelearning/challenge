@@ -3,6 +3,7 @@ package com.rumodigi.fanduelmobilechallenge.presentation.view.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.rumodigi.fanduelmobilechallenge.presentation.di.components.PlayerComp
 import com.rumodigi.fanduelmobilechallenge.presentation.presenter.PlayerComparisonPresenter;
 import com.rumodigi.fanduelmobilechallenge.presentation.view.ImageLoaderView;
 import com.rumodigi.fanduelmobilechallenge.presentation.view.PlayerComparisonView;
+import com.rumodigi.fanduelmobilechallenge.presentation.view.activity.PlayerComparisonActivity;
 
 
 import javax.inject.Inject;
@@ -25,6 +27,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PlayerComparisonFragment extends BaseFragment implements PlayerComparisonView {
+
+    private static final String INSTANCE_STATE_PARAM_PLAYER_1 = "org.android10.STATE_PARAM_PLAYER_1";
+    private static final String INSTANCE_STATE_PARAM_PLAYER_2 = "org.android10.STATE_PARAM_PLAYER_2";
+    private static final String INSTANCE_STATE_PARAM_CURRENT_SCORE = "org.android10.STATE_PARAM_CURRENT_SCORE";
 
     @Inject
     PlayerComparisonPresenter playerComparisonPresenter;
@@ -85,7 +91,13 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(PlayerComponent.class).inject(this);
+        Log.d("Fragment", "Component state " + this.getComponent(PlayerComponent.class));
+        if(this.getComponent(PlayerComponent.class) != null){
+            this.getComponent(PlayerComponent.class).inject(this);
+        } else {
+            ((PlayerComparisonActivity)getActivity()).initializeInjector();
+            this.getComponent(PlayerComponent.class).inject(this);
+        }
 
     }
 
@@ -98,30 +110,64 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d("Fragment", "Presenter info" + this.playerComparisonPresenter.toString());
         this.playerComparisonPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadPlayers();
+        } else {
+            Log.d("Fragment", "Anything in the list" + this.playerComparisonPresenter.getPlayerList());
+            Log.d("Fragment", "Player 1 in savedInstanceState" + savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_1));
+            Log.d("Fragment", "Player 2 in savedInstanceState" + savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_2));
+            this.playerComparisonPresenter.initialise(savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_1),
+                    savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_2),
+                    savedInstanceState.getInt(INSTANCE_STATE_PARAM_CURRENT_SCORE));
         }
+    }
+
+    @Override public void onResume() {
+        super.onResume();
+        this.playerComparisonPresenter.resume();
+    }
+
+    @Override public void onPause() {
+        super.onPause();
+        this.playerComparisonPresenter.pause();
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("Fragment", "onDestroyView" + this.getComponent(PlayerComponent.class));
+        ButterKnife.unbind(this);
+    }
+
+    @Override public void onDestroy() {
+        super.onDestroy();
+        Log.d("Fragment", "onDestroy" + this.getComponent(PlayerComponent.class));
+        this.playerComparisonPresenter.destroy();
+    }
+
+    @Override public void onDetach() {
+        super.onDetach();
+        Log.d("Fragment", "onDetach" + this.getComponent(PlayerComponent.class));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(INSTANCE_STATE_PARAM_PLAYER_1 , playerComparisonPresenter.getPlayer1().getId());
+        outState.putString(INSTANCE_STATE_PARAM_PLAYER_2 , playerComparisonPresenter.getPlayer2().getId());
+        outState.putInt(INSTANCE_STATE_PARAM_CURRENT_SCORE, Integer.valueOf(currentScore.getText().toString()));
     }
 
     @Override
     public void showLoading(){}
 
-    /**
-     * Hide a loading view.
-     */
     @Override
     public void hideLoading(){}
 
-    /**
-     * Show a retry view in case of an error when retrieving data.
-     */
     @Override
     public void showRetry(){}
 
-    /**
-     * Hide a retry view shown if there was an error when retrieving data.
-     */
     @Override
     public void hideRetry(){}
 
