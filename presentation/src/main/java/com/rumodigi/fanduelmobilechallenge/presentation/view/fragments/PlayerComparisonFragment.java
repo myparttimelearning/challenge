@@ -41,6 +41,9 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     @Bind(R.id.higherButton)
     Button higherButton;
 
+    @Bind(R.id.higherOrLower)
+    TextView higherOrLower;
+
     @Bind(R.id.lowerButton)
     Button lowerButton;
 
@@ -180,6 +183,7 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
             playAgain.setVisibility(View.GONE);
             higherButton.setVisibility(View.VISIBLE);
             lowerButton.setVisibility(View.VISIBLE);
+            higherOrLower.setVisibility(View.VISIBLE);
         }
         if(score < 10){
             currentScore.setText(Integer.toString(score));
@@ -192,6 +196,7 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
             currentScore.setText(Integer.toString(score));
             higherButton.setVisibility(View.GONE);
             lowerButton.setVisibility(View.GONE);
+            higherOrLower.setVisibility(View.GONE);
             gameOver.setVisibility(View.VISIBLE);
             playAgain.setVisibility(View.VISIBLE);
         }

@@ -45,7 +45,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    PlayerCache provideUserCache() {
+    PlayerCache providePlayerCache() {
         return null;
     }
 

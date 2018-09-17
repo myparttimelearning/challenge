@@ -12,7 +12,7 @@
     <string name="higher_or_lower">is HIGHER or LOWER than</string>
     <string name="score">YOUR SCORE</string>
     <string name="play_again">Play Again</string>
-    <string name="game_over">GAME OVER</string>
+    <string name="game_over">10 CORRECT - GAME OVER</string>
     <string name="zero">0</string>
     <string name="app_name">FPPG Game</string>
 </resources>

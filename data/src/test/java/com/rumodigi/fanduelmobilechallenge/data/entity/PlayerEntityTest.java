@@ -102,7 +102,7 @@ public class PlayerEntityTest {
     }
 
     @Test
-    public void testTransformUserEntityCollectionNotValidResponse() {
+    public void testTransformPlayerEntityCollectionNotValidResponse() {
         expectedException.expect(JsonSyntaxException.class);
         playerEntityJsonMap.transformPlayerEntityCollection("bar");
     }

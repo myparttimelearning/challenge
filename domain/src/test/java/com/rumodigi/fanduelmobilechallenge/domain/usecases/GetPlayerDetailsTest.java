@@ -43,7 +43,7 @@ public class GetPlayerDetailsTest {
     }
 
     @Test
-    public void testGetUserDetailsUseCaseObservableSuccess(){
+    public void testGetPlayerDetailsUseCaseObservableSuccess(){
         getPlayerDetails.buildUseCaseObservable(GetPlayerDetails.Params.forPlayer(TEST_ID));
         verify(mockPlayerRepository).player(TEST_ID);
         verifyNoMoreInteractions(mockPlayerRepository);
