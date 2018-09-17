@@ -99,14 +99,14 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     public void guessedHigher(){
-        if (getPlayer2().getFppg() > getPlayer1().getFppg()){
+        if (getPlayer1().getFppg() > getPlayer2().getFppg()){
             score++;
         }
         playerComparisonView.updateScore(score);
     }
 
     public void guessedLower(){
-        if (getPlayer2().getFppg() < getPlayer1().getFppg()){
+        if (getPlayer1().getFppg() < getPlayer2().getFppg()){
             score++;
         }
         playerComparisonView.updateScore(score);
@@ -140,7 +140,7 @@ public class PlayerComparisonPresenter implements Presenter {
         return new Random().nextInt(getPlayerList().size());
     }
 
-    public List<PlayerModel> getPlayerList() {
+    private List<PlayerModel> getPlayerList() {
         return playerList;
     }
 

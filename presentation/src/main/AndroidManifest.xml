@@ -9,8 +9,7 @@
         android:name=".AndroidApplication"
         android:allowBackup="true"
         android:theme="@android:style/Theme.Holo.NoActionBar">
-        <activity android:name=".view.activity.PlayerComparisonActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".view.activity.PlayerComparisonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

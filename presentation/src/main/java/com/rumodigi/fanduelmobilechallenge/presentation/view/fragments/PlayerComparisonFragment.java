@@ -30,6 +30,7 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     private static final String INSTANCE_STATE_PARAM_PLAYER_1 = "org.android10.STATE_PARAM_PLAYER_1";
     private static final String INSTANCE_STATE_PARAM_PLAYER_2 = "org.android10.STATE_PARAM_PLAYER_2";
     private static final String INSTANCE_STATE_PARAM_CURRENT_SCORE = "org.android10.STATE_PARAM_CURRENT_SCORE";
+    private boolean savedInstanceReload;
 
     @Inject
     PlayerComparisonPresenter playerComparisonPresenter;
@@ -112,6 +113,7 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
         if (savedInstanceState == null) {
             this.loadPlayers();
         } else {
+            this.savedInstanceReload = true;
             this.playerComparisonPresenter.initialise(savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_1),
                     savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_2),
                     savedInstanceState.getInt(INSTANCE_STATE_PARAM_CURRENT_SCORE));
@@ -181,7 +183,11 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
         }
         if(score < 10){
             currentScore.setText(Integer.toString(score));
-            playerComparisonPresenter.switchPlayers();
+            if(!savedInstanceReload){
+                playerComparisonPresenter.switchPlayers();
+            } else {
+                savedInstanceReload = false;
+            }
         } else {
             currentScore.setText(Integer.toString(score));
             higherButton.setVisibility(View.GONE);
