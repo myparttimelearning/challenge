@@ -3,7 +3,6 @@ package com.rumodigi.fanduelmobilechallenge.presentation.view.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.rumodigi.fanduelmobilechallenge.domain.models.Player;
 import com.rumodigi.fanduelmobilechallenge.presentation.R;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.PlayerComponent;
+import com.rumodigi.fanduelmobilechallenge.presentation.model.PlayerModel;
 import com.rumodigi.fanduelmobilechallenge.presentation.presenter.PlayerComparisonPresenter;
 import com.rumodigi.fanduelmobilechallenge.presentation.view.ImageLoaderView;
 import com.rumodigi.fanduelmobilechallenge.presentation.view.PlayerComparisonView;
@@ -91,7 +90,6 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("Fragment", "Component state " + this.getComponent(PlayerComponent.class));
         if(this.getComponent(PlayerComponent.class) != null){
             this.getComponent(PlayerComponent.class).inject(this);
         } else {
@@ -110,14 +108,10 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("Fragment", "Presenter info" + this.playerComparisonPresenter.toString());
         this.playerComparisonPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadPlayers();
         } else {
-            Log.d("Fragment", "Anything in the list" + this.playerComparisonPresenter.getPlayerList());
-            Log.d("Fragment", "Player 1 in savedInstanceState" + savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_1));
-            Log.d("Fragment", "Player 2 in savedInstanceState" + savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_2));
             this.playerComparisonPresenter.initialise(savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_1),
                     savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_2),
                     savedInstanceState.getInt(INSTANCE_STATE_PARAM_CURRENT_SCORE));
@@ -136,19 +130,16 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        Log.d("Fragment", "onDestroyView" + this.getComponent(PlayerComponent.class));
         ButterKnife.unbind(this);
     }
 
     @Override public void onDestroy() {
         super.onDestroy();
-        Log.d("Fragment", "onDestroy" + this.getComponent(PlayerComponent.class));
         this.playerComparisonPresenter.destroy();
     }
 
     @Override public void onDetach() {
         super.onDetach();
-        Log.d("Fragment", "onDetach" + this.getComponent(PlayerComponent.class));
     }
 
     @Override
@@ -172,7 +163,7 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     public void hideRetry(){}
 
     @Override
-    public void renderPlayers(Pair<Player, Player> playerModelPair) {
+    public void renderPlayers(Pair<PlayerModel, PlayerModel> playerModelPair) {
         photoPlayer1.setImageUrl(playerModelPair.first.getImageUrl());
         namePlayer1.setText(playerModelPair.first.getFirstName() + " " + playerModelPair.first.getLastName());
         fppgPlayer1.setText(String.valueOf(playerModelPair.first.getFppg()));

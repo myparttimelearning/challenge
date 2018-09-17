@@ -8,14 +8,10 @@ import android.os.Bundle;
 import com.rumodigi.fanduelmobilechallenge.presentation.AndroidApplication;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.ApplicationComponent;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.modules.ActivityModule;
-import com.rumodigi.fanduelmobilechallenge.presentation.navigation.Navigator;
 
 import javax.inject.Inject;
 
 public abstract class BaseActivity extends Activity {
-
-    @Inject
-    Navigator navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

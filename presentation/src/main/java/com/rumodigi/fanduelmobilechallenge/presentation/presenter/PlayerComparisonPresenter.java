@@ -1,13 +1,14 @@
 package com.rumodigi.fanduelmobilechallenge.presentation.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.util.Pair;
 
 import com.rumodigi.fanduelmobilechallenge.domain.models.Player;
 import com.rumodigi.fanduelmobilechallenge.domain.usecases.DefaultObserver;
 import com.rumodigi.fanduelmobilechallenge.domain.usecases.GetPlayerList;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.PerActivity;
+import com.rumodigi.fanduelmobilechallenge.presentation.mapper.PlayerModelDataMapper;
+import com.rumodigi.fanduelmobilechallenge.presentation.model.PlayerModel;
 import com.rumodigi.fanduelmobilechallenge.presentation.view.PlayerComparisonView;
 
 import java.util.ArrayList;
@@ -19,21 +20,26 @@ import javax.inject.Inject;
 
 @PerActivity
 public class PlayerComparisonPresenter implements Presenter {
-    private final GetPlayerList getPlayerListUseCase;
+
     private PlayerComparisonView playerComparisonView;
-    private final List<Player> playerList;
-    private Player player1;
-    private Player player2;
-    private Pair<Player, Player> playerPair;
+    private final GetPlayerList getPlayerListUseCase;
+    private final PlayerModelDataMapper playerModelDataMapper;
+
+    private final List<PlayerModel> playerList;
+    private PlayerModel player1;
+    private PlayerModel player2;
+    private Pair<PlayerModel, PlayerModel> playerPair;
     private int score = 0;
     private boolean fromSavedInstance;
     private String savedInstancePlayer1Id;
     private String savedInstancePlayer2Id;
 
     @Inject
-    public PlayerComparisonPresenter(GetPlayerList getPlayerListUseCase){
+    public PlayerComparisonPresenter(GetPlayerList getPlayerListUseCase,
+                                     PlayerModelDataMapper playerModelDataMapper){
         this.playerList = new ArrayList<>();
         this.getPlayerListUseCase = getPlayerListUseCase;
+        this.playerModelDataMapper = playerModelDataMapper;
     }
 
     public void setView(@NonNull PlayerComparisonView view) {
@@ -69,11 +75,11 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     private void refreshDetailsFromSavedInstanceDetails(){
-        for(Player player : playerList){
-            if (player.getId().equals(savedInstancePlayer1Id)){
-                player1 = player;
-            } else if (player.getId().equals(savedInstancePlayer2Id)){
-                player2 = player;
+        for(PlayerModel playerModel : playerList){
+            if (playerModel.getId().equals(savedInstancePlayer1Id)){
+                player1 = playerModel;
+            } else if (playerModel.getId().equals(savedInstancePlayer2Id)){
+                player2 = playerModel;
             }
         }
         playerPair = new Pair<>(getPlayer1(), getPlayer2());
@@ -84,7 +90,12 @@ public class PlayerComparisonPresenter implements Presenter {
     private void getFirstPair(){
         player1 = getPlayerList().get(getRandomNumberInRange());
         setPlayer2();
+        playerPair = new Pair<>(getPlayer1(), getPlayer2());
         playerComparisonView.renderPlayers(playerPair);
+    }
+
+    private PlayerModel mapPlayerToPlayerModel(Player player){
+        return this.playerModelDataMapper.transform(player);
     }
 
     public void guessedHigher(){
@@ -110,6 +121,7 @@ public class PlayerComparisonPresenter implements Presenter {
 
         player1 = getPlayer2();
         setPlayer2();
+        playerPair = new Pair<>(getPlayer1(), getPlayer2());
         playerComparisonView.renderPlayers(playerPair);
     }
 
@@ -118,9 +130,6 @@ public class PlayerComparisonPresenter implements Presenter {
         while (playersAreTheSame()){
             player2 = getPlayerList().get(getRandomNumberInRange());
         }
-        playerPair = new Pair<>(getPlayer1(), getPlayer2());
-        Log.i("Player 1", playerPair.first.getFirstName() + " " + playerPair.first.getLastName());
-        Log.i("Player 2", playerPair.second.getFirstName() + " " + playerPair.second.getLastName());
     }
 
     private boolean playersAreTheSame() {
@@ -131,15 +140,15 @@ public class PlayerComparisonPresenter implements Presenter {
         return new Random().nextInt(getPlayerList().size());
     }
 
-    public List<Player> getPlayerList() {
+    public List<PlayerModel> getPlayerList() {
         return playerList;
     }
 
-    public Player getPlayer1() {
+    public PlayerModel getPlayer1() {
         return player1;
     }
 
-    public Player getPlayer2() {
+    public PlayerModel getPlayer2() {
         return player2;
     }
 
@@ -150,7 +159,6 @@ public class PlayerComparisonPresenter implements Presenter {
             } else {
                 PlayerComparisonPresenter.this.getFirstPair();
             }
-
         }
 
         @Override public void onError(Throwable e) {
@@ -158,7 +166,9 @@ public class PlayerComparisonPresenter implements Presenter {
         }
 
         @Override public void onNext(List<Player> players) {
-            getPlayerList().addAll(players);
+            for(Player player : players){
+                getPlayerList().add(PlayerComparisonPresenter.this.mapPlayerToPlayerModel(player));
+            }
         }
     }
 }
