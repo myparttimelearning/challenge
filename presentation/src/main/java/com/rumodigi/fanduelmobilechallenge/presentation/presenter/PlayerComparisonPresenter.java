@@ -1,7 +1,6 @@
 package com.rumodigi.fanduelmobilechallenge.presentation.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Pair;
 
 import com.rumodigi.fanduelmobilechallenge.domain.models.Player;
 import com.rumodigi.fanduelmobilechallenge.domain.usecases.DefaultObserver;
@@ -27,7 +26,6 @@ public class PlayerComparisonPresenter implements Presenter {
     private final List<PlayerModel> playerList;
     private PlayerModel player1;
     private PlayerModel player2;
-    private Pair<PlayerModel, PlayerModel> playerPair;
     private int score = 0;
     private boolean fromSavedInstance;
 
@@ -72,16 +70,14 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     private void refreshDetailsFromSavedInstanceDetails(){
-        playerPair = new Pair<>(getPlayer1(), getPlayer2());
         playerComparisonView.updateScore(score);
-        playerComparisonView.renderPlayers(playerPair);
+        playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
     }
 
     private void getFirstPair(){
         player1 = getPlayerList().get(getRandomNumberInRange());
         setPlayer2();
-        playerPair = new Pair<>(getPlayer1(), getPlayer2());
-        playerComparisonView.renderPlayers(playerPair);
+        playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
     }
 
     private PlayerModel mapPlayerToPlayerModel(Player player){
@@ -114,11 +110,9 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     public void switchPlayers() {
-
         player1 = getPlayer2();
         setPlayer2();
-        playerPair = new Pair<>(getPlayer1(), getPlayer2());
-        playerComparisonView.renderPlayers(playerPair);
+        playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
     }
 
     private void setPlayer2() {

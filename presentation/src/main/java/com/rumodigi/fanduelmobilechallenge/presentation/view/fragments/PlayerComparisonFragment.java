@@ -165,13 +165,13 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     public void hideRetry(){}
 
     @Override
-    public void renderPlayers(Pair<PlayerModel, PlayerModel> playerModelPair) {
-        photoPlayer1.setImageUrl(playerModelPair.first.getImageUrl());
-        namePlayer1.setText(playerModelPair.first.getName());
+    public void renderPlayers(PlayerModel player1, PlayerModel player2) {
+        photoPlayer1.setImageUrl(player1.getImageUrl());
+        namePlayer1.setText(player1.getName());
         fppg.setVisibility(View.VISIBLE);
-        fppgPlayer1.setText(String.valueOf(playerModelPair.first.getFppg()));
-        photoPlayer2.setImageUrl(playerModelPair.second.getImageUrl());
-        namePlayer2.setText(playerModelPair.second.getName());
+        fppgPlayer1.setText(String.valueOf(player1.getFppg()));
+        photoPlayer2.setImageUrl(player2.getImageUrl());
+        namePlayer2.setText(player2.getName());
     }
 
     @Override
