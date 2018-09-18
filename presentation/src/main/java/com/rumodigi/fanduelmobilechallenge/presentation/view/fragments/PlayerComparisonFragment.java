@@ -97,13 +97,7 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(this.getComponent(PlayerComponent.class) != null){
-            this.getComponent(PlayerComponent.class).inject(this);
-        } else {
-            ((PlayerComparisonActivity)getActivity()).initializeInjector();
-            this.getComponent(PlayerComponent.class).inject(this);
-        }
-
+        this.getComponent(PlayerComponent.class).inject(this);
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,

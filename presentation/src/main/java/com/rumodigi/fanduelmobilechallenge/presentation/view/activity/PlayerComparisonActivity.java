@@ -22,15 +22,18 @@ public class PlayerComparisonActivity extends BaseActivity implements ContainsCo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // this.initializeInjector() Moved above call to super as component object is null
+        // if kill activities is enabled in dev options.
+        //TODO There must be a better way to do this!
+        this.initializeInjector();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_list);
-        this.initializeInjector();
         if (savedInstanceState == null) {
             addFragment(R.id.fragmentContainer, new PlayerComparisonFragment());
         }
     }
 
-    public void initializeInjector() {
+    private void initializeInjector() {
         this.playerComponent = DaggerPlayerComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
