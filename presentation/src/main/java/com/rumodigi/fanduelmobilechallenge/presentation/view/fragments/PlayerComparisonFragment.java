@@ -114,8 +114,8 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
             this.loadPlayers();
         } else {
             this.savedInstanceReload = true;
-            this.playerComparisonPresenter.initialise(savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_1),
-                    savedInstanceState.getString(INSTANCE_STATE_PARAM_PLAYER_2),
+            this.playerComparisonPresenter.initialise(savedInstanceState.getParcelable(INSTANCE_STATE_PARAM_PLAYER_1),
+                    savedInstanceState.getParcelable(INSTANCE_STATE_PARAM_PLAYER_2),
                     savedInstanceState.getInt(INSTANCE_STATE_PARAM_CURRENT_SCORE));
         }
     }
@@ -147,8 +147,8 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(INSTANCE_STATE_PARAM_PLAYER_1 , playerComparisonPresenter.getPlayer1().getId());
-        outState.putString(INSTANCE_STATE_PARAM_PLAYER_2 , playerComparisonPresenter.getPlayer2().getId());
+        outState.putParcelable(INSTANCE_STATE_PARAM_PLAYER_1 , playerComparisonPresenter.getPlayer1());
+        outState.putParcelable(INSTANCE_STATE_PARAM_PLAYER_2 , playerComparisonPresenter.getPlayer2());
         outState.putInt(INSTANCE_STATE_PARAM_CURRENT_SCORE, Integer.valueOf(currentScore.getText().toString()));
     }
 
@@ -167,11 +167,11 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     @Override
     public void renderPlayers(Pair<PlayerModel, PlayerModel> playerModelPair) {
         photoPlayer1.setImageUrl(playerModelPair.first.getImageUrl());
-        namePlayer1.setText(playerModelPair.first.getFirstName() + " " + playerModelPair.first.getLastName());
+        namePlayer1.setText(playerModelPair.first.getName());
         fppg.setVisibility(View.VISIBLE);
         fppgPlayer1.setText(String.valueOf(playerModelPair.first.getFppg()));
         photoPlayer2.setImageUrl(playerModelPair.second.getImageUrl());
-        namePlayer2.setText(playerModelPair.second.getFirstName() + " " + playerModelPair.second.getLastName());
+        namePlayer2.setText(playerModelPair.second.getName());
     }
 
     @Override

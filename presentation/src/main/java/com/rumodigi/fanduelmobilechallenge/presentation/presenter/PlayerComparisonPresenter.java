@@ -24,15 +24,12 @@ public class PlayerComparisonPresenter implements Presenter {
     private PlayerComparisonView playerComparisonView;
     private final GetPlayerList getPlayerListUseCase;
     private final PlayerModelDataMapper playerModelDataMapper;
-
     private final List<PlayerModel> playerList;
     private PlayerModel player1;
     private PlayerModel player2;
     private Pair<PlayerModel, PlayerModel> playerPair;
     private int score = 0;
     private boolean fromSavedInstance;
-    private String savedInstancePlayer1Id;
-    private String savedInstancePlayer2Id;
 
     @Inject
     public PlayerComparisonPresenter(GetPlayerList getPlayerListUseCase,
@@ -62,10 +59,10 @@ public class PlayerComparisonPresenter implements Presenter {
         this.loadPlayerList();
     }
 
-    public void initialise(String player1Id, String player2Id, int currentScore){
+    public void initialise(PlayerModel player1, PlayerModel player2, int currentScore){
         fromSavedInstance = true;
-        savedInstancePlayer1Id = player1Id;
-        savedInstancePlayer2Id = player2Id;
+        this.player1 = player1;
+        this.player2 = player2;
         score = currentScore;
         this.loadPlayerList();
     }
@@ -75,13 +72,6 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     private void refreshDetailsFromSavedInstanceDetails(){
-        for(PlayerModel playerModel : playerList){
-            if (playerModel.getId().equals(savedInstancePlayer1Id)){
-                player1 = playerModel;
-            } else if (playerModel.getId().equals(savedInstancePlayer2Id)){
-                player2 = playerModel;
-            }
-        }
         playerPair = new Pair<>(getPlayer1(), getPlayer2());
         playerComparisonView.updateScore(score);
         playerComparisonView.renderPlayers(playerPair);
@@ -99,6 +89,9 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     public void guessedHigher(){
+        if(getPlayer1() == null){
+            return;
+        }
         if (getPlayer1().getFppg() > getPlayer2().getFppg()){
             score++;
         }
@@ -106,6 +99,9 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     public void guessedLower(){
+        if(getPlayer1() == null){
+            return;
+        }
         if (getPlayer1().getFppg() < getPlayer2().getFppg()){
             score++;
         }

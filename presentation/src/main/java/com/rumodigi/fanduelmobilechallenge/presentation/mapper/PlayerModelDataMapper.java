@@ -16,8 +16,7 @@ public class PlayerModelDataMapper {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
         final PlayerModel playerModel = new PlayerModel(player.getId());
-        playerModel.setFirstName(player.getFirstName());
-        playerModel.setLastName(player.getLastName());
+        playerModel.setName(player.getFirstName() + " " + player.getLastName());
         playerModel.setFppg(player.getFppg());
         playerModel.setImageUrl(player.getImageUrl());
         return playerModel;
