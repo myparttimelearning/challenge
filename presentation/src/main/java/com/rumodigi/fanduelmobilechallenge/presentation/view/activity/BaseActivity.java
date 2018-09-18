@@ -8,10 +8,18 @@ import android.os.Bundle;
 import com.rumodigi.fanduelmobilechallenge.presentation.AndroidApplication;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.ApplicationComponent;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.modules.ActivityModule;
+import com.rumodigi.fanduelmobilechallenge.presentation.navigation.Navigator;
+import com.rumodigi.fanduelmobilechallenge.presentation.util.CheckInternetConnection;
 
 import javax.inject.Inject;
 
 public abstract class BaseActivity extends Activity {
+
+    @Inject
+    Navigator navigator;
+
+    @Inject
+    CheckInternetConnection checkInternetConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

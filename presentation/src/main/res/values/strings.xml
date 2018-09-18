@@ -15,4 +15,6 @@
     <string name="game_over">10 CORRECT - GAME OVER</string>
     <string name="zero">0</string>
     <string name="app_name">FPPG Game</string>
+    <string name="fppg_higher_or_lower">FPPG Higher or Lower</string>
+    <string name="click_to_start">CLICK TO START</string>
 </resources>

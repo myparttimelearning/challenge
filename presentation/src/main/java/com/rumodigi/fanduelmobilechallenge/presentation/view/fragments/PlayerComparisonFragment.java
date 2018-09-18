@@ -44,6 +44,9 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     @Bind(R.id.higherOrLower)
     TextView higherOrLower;
 
+    @Bind(R.id.fppg)
+    TextView fppg;
+
     @Bind(R.id.lowerButton)
     Button lowerButton;
 
@@ -171,6 +174,7 @@ public class PlayerComparisonFragment extends BaseFragment implements PlayerComp
     public void renderPlayers(Pair<PlayerModel, PlayerModel> playerModelPair) {
         photoPlayer1.setImageUrl(playerModelPair.first.getImageUrl());
         namePlayer1.setText(playerModelPair.first.getFirstName() + " " + playerModelPair.first.getLastName());
+        fppg.setVisibility(View.VISIBLE);
         fppgPlayer1.setText(String.valueOf(playerModelPair.first.getFppg()));
         photoPlayer2.setImageUrl(playerModelPair.second.getImageUrl());
         namePlayer2.setText(playerModelPair.second.getFirstName() + " " + playerModelPair.second.getLastName());
