@@ -1,6 +1,5 @@
 package com.rumodigi.fanduelmobilechallenge.data.exectuor;
 
-import android.support.annotation.NonNull;
 import com.rumodigi.fanduelmobilechallenge.domain.executors.ThreadExecutor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -8,6 +7,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.annotations.NonNull;
 
 @Singleton
 public class TaskExecutor implements ThreadExecutor {

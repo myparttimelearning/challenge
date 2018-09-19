@@ -1,7 +1,7 @@
 package com.rumodigi.fanduelmobilechallenge.data.repository.datastores;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
 
 import com.rumodigi.fanduelmobilechallenge.data.connect.RestApi;
 import com.rumodigi.fanduelmobilechallenge.data.connect.RestApiImpl;
@@ -11,6 +11,8 @@ import com.rumodigi.fanduelmobilechallenge.data.repository.datastores.PlayerData
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.annotations.NonNull;
 
 @Singleton
 public class PlayerDataStoreFactory {

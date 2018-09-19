@@ -1,7 +1,5 @@
 package com.rumodigi.fanduelmobilechallenge.data.connect;
 
-import android.support.annotation.Nullable;
-
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 
@@ -10,6 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+
+import io.reactivex.annotations.Nullable;
 
 /**
  * Api Connection class used to retrieve data from the web
