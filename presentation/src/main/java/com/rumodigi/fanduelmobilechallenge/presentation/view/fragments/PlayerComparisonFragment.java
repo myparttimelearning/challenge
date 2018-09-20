@@ -27,9 +27,9 @@ import butterknife.OnClick;
 
 public class PlayerComparisonFragment extends BaseFragment implements PlayerComparisonView {
 
-    private static final String INSTANCE_STATE_PARAM_PLAYER_1 = "org.android10.STATE_PARAM_PLAYER_1";
-    private static final String INSTANCE_STATE_PARAM_PLAYER_2 = "org.android10.STATE_PARAM_PLAYER_2";
-    private static final String INSTANCE_STATE_PARAM_CURRENT_SCORE = "org.android10.STATE_PARAM_CURRENT_SCORE";
+    private static final String INSTANCE_STATE_PARAM_PLAYER_1 = "STATE_PARAM_PLAYER_1";
+    private static final String INSTANCE_STATE_PARAM_PLAYER_2 = "STATE_PARAM_PLAYER_2";
+    private static final String INSTANCE_STATE_PARAM_CURRENT_SCORE = "STATE_PARAM_CURRENT_SCORE";
     private boolean savedInstanceReload;
 
     @Inject

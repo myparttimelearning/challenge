@@ -85,7 +85,7 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     public void guessedHigher(){
-        if(getPlayer1() == null){
+        if(getPlayer1() == null || getPlayer2() == null){
             return;
         }
         if (getPlayer1().getFppg() > getPlayer2().getFppg()){
@@ -95,7 +95,7 @@ public class PlayerComparisonPresenter implements Presenter {
     }
 
     public void guessedLower(){
-        if(getPlayer1() == null){
+        if(getPlayer1() == null || getPlayer2() == null){
             return;
         }
         if (getPlayer1().getFppg() < getPlayer2().getFppg()){
