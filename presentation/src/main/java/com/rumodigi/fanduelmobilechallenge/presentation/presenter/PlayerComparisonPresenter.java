@@ -1,7 +1,6 @@
 package com.rumodigi.fanduelmobilechallenge.presentation.presenter;
 
 import com.rumodigi.fanduelmobilechallenge.domain.models.Player;
-import com.rumodigi.fanduelmobilechallenge.domain.usecases.DefaultObserver;
 import com.rumodigi.fanduelmobilechallenge.domain.usecases.GetPlayerList;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.PerActivity;
 import com.rumodigi.fanduelmobilechallenge.presentation.mapper.PlayerModelDataMapper;
@@ -18,7 +17,7 @@ import io.reactivex.annotations.NonNull;
 
 
 @PerActivity
-public class PlayerComparisonPresenter implements Presenter {
+public class PlayerComparisonPresenter implements Presenter, PlayerListObserverInterface {
 
     private PlayerComparisonView playerComparisonView;
     private final GetPlayerList getPlayerListUseCase;
@@ -53,6 +52,18 @@ public class PlayerComparisonPresenter implements Presenter {
         this.playerComparisonView = null;
     }
 
+    @Override
+    public void playerList(List<Player> players) {
+        for(Player player : players){
+            playerList.add(mapPlayerToPlayerModel(player));
+        }
+        if(fromSavedInstance){
+            refreshDetailsFromSavedInstanceDetails();
+        } else {
+            getFirstPair();
+        }
+    }
+
     public void initialise(){
         this.loadPlayerList();
     }
@@ -63,25 +74,6 @@ public class PlayerComparisonPresenter implements Presenter {
         this.player2 = player2;
         score = currentScore;
         this.loadPlayerList();
-    }
-
-    private void loadPlayerList(){
-        this.getPlayerListUseCase.execute(new PlayerListObserver(), null);
-    }
-
-    private void refreshDetailsFromSavedInstanceDetails(){
-        playerComparisonView.updateScore(score);
-        playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
-    }
-
-    private void getFirstPair(){
-        player1 = getPlayerList().get(getRandomNumberInRange());
-        setPlayer2();
-        playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
-    }
-
-    private PlayerModel mapPlayerToPlayerModel(Player player){
-        return this.playerModelDataMapper.transform(player);
     }
 
     public void guessedHigher(){
@@ -115,25 +107,6 @@ public class PlayerComparisonPresenter implements Presenter {
         playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
     }
 
-    private void setPlayer2() {
-        player2 = getPlayerList().get(getRandomNumberInRange());
-        while (playersAreTheSame()){
-            player2 = getPlayerList().get(getRandomNumberInRange());
-        }
-    }
-
-    private boolean playersAreTheSame() {
-        return getPlayer2().getId().matches(getPlayer1().getId());
-    }
-
-    private int getRandomNumberInRange(){
-        return new Random().nextInt(getPlayerList().size());
-    }
-
-    private List<PlayerModel> getPlayerList() {
-        return playerList;
-    }
-
     public PlayerModel getPlayer1() {
         return player1;
     }
@@ -142,23 +115,37 @@ public class PlayerComparisonPresenter implements Presenter {
         return player2;
     }
 
-    private final class PlayerListObserver extends DefaultObserver<List<Player>> {
-        @Override public void onComplete() {
-            if(fromSavedInstance){
-                PlayerComparisonPresenter.this.refreshDetailsFromSavedInstanceDetails();
-            } else {
-                PlayerComparisonPresenter.this.getFirstPair();
-            }
-        }
+    private void loadPlayerList(){
+        this.getPlayerListUseCase.execute(new PlayerListObserver(this), null);
+    }
 
-        @Override public void onError(Throwable e) {
+    private void getFirstPair(){
+        player1 = playerList.get(getRandomNumberInRange());
+        setPlayer2();
+        playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
+    }
 
-        }
+    private void refreshDetailsFromSavedInstanceDetails(){
+        playerComparisonView.updateScore(score);
+        playerComparisonView.renderPlayers(getPlayer1(), getPlayer2());
+    }
 
-        @Override public void onNext(List<Player> players) {
-            for(Player player : players){
-                getPlayerList().add(PlayerComparisonPresenter.this.mapPlayerToPlayerModel(player));
-            }
+    private PlayerModel mapPlayerToPlayerModel(Player player){
+        return this.playerModelDataMapper.transform(player);
+    }
+
+    private void setPlayer2() {
+        player2 = playerList.get(getRandomNumberInRange());
+        while (playersAreTheSame()){
+            player2 = playerList.get(getRandomNumberInRange());
         }
+    }
+
+    private boolean playersAreTheSame() {
+        return getPlayer2().getId().matches(getPlayer1().getId());
+    }
+
+    private int getRandomNumberInRange(){
+        return new Random().nextInt(playerList.size());
     }
 }

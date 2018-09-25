@@ -74,6 +74,9 @@ dependencies {
     implementation presentationDependencies.rxAndroid
     compileOnly presentationDependencies.javaxAnnotation
 //
+    testImplementation presentationTestDependencies.junit
+    testImplementation presentationTestDependencies.mockito
+    testImplementation presentationTestDependencies.mockitoInline
     androidTestImplementation presentationTestDependencies.mockito
     androidTestImplementation presentationTestDependencies.mockitoAndroid
     androidTestImplementation presentationTestDependencies.espresso
