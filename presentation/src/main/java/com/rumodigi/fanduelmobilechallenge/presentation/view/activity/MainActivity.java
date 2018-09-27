@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
         if(this.checkInternetConnection.isThereInternetConnection(getApplicationContext())){
             this.navigator.navigateToPlayerComparison(this);
         } else {
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -80,6 +80,7 @@ dependencies {
     androidTestImplementation presentationTestDependencies.mockito
     androidTestImplementation presentationTestDependencies.mockitoAndroid
     androidTestImplementation presentationTestDependencies.espresso
+    androidTestImplementation presentationTestDependencies.espressoIntents
 //
 //    //Development
     implementation developmentDependencies.leakCanary

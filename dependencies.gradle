@@ -49,6 +49,7 @@ ext {
             mockitoAndroid:     "org.mockito:mockito-android:${mockitoVersion}",
             mockitoInline:      "org.mockito:mockito-inline:${mockitoVersion}",
             espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents:    "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
     ]
 
     domainDependencies = [

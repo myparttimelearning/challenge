@@ -8,15 +8,9 @@ import com.rumodigi.fanduelmobilechallenge.presentation.R;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.ContainsComponent;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.DaggerPlayerComponent;
 import com.rumodigi.fanduelmobilechallenge.presentation.di.components.PlayerComponent;
-import com.rumodigi.fanduelmobilechallenge.presentation.navigation.Navigator;
 import com.rumodigi.fanduelmobilechallenge.presentation.view.fragments.PlayerComparisonFragment;
 
-import javax.inject.Inject;
-
 public class PlayerComparisonActivity extends BaseActivity implements ContainsComponent<PlayerComponent>{
-
-    private static final String INSTANCE_STATE_PLAYER_COMPONENT = "com.rumodigi.STATE_PLAYER_COMPONENT";
-
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, PlayerComparisonActivity.class);
     }
